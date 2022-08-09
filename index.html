@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
+    />
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script defer src="theme-switcher.js" defer></script>
+
+    <script src="index.js" defer></script>
+    <script>
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+    <title>Tabel Perkalian</title>
+  </head>
+  <body>
+    <header
+      class="fixed top-0 left-0 right-0 flex flex-row items-center w-screen pt-2"
+      id="header"
+    >
+      <div class="flex flex-row pl-2 space-x-2 grow" id="selektor-halaman">
+        <button
+          class="block p-2 text-sm font-medium text-gray-500 rounded-lg dark:target:text-gray-300 target:text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+          id="kecepatan"
+          href="#percepatan"
+        >
+          Tabel Perkalian
+        </button>
+      </div>
+      <button
+        hidden
+        id="theme-toggle"
+        type="button"
+        class="p-2 mr-2 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+        title="Tema"
+      >
+        <svg
+          id="theme-toggle-dark-icon"
+          class="hidden w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+          ></path>
+        </svg>
+        <svg
+          id="theme-toggle-light-icon"
+          class="hidden w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </header>
+    <div class="w-screen h-screen bg-gray-100 dark:bg-gray-800">
+      <div
+        class="flex flex-col min-w-xs items-center justify-center w-full h-full align-middle space-y-4"
+      >
+        <div
+          class="w-60 flex p-2.5 py-2 border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600 items-center ukuran"
+        >
+          <span class="py-0 pr-4 text-sm text-gray-900 dark:text-gray-300">
+            Ukuran
+          </span>
+          <input
+            class="w-8 h-8 px-1 py-0 text-lg text-right text-gray-900 bg-transparent border-0 border-gray-300 grow focus:border-b bg-gray-50 focus:ring-0 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            placeholder="10"
+            type="number"
+            min="0"
+            max="100"
+            id="sizeCol"
+          />
+          <span class="py-0 pr-4 text-sm text-gray-900 dark:text-gray-300">
+            &times;
+          </span>
+          <input
+            class="w-8 h-8 px-1 py-0 text-lg text-right text-gray-900 bg-transparent border-0 border-gray-300 grow focus:border-b bg-gray-50 focus:ring-0 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            placeholder="10"
+            type="number"
+            min="0"
+            max="100"
+            id="sizeRow"
+          />
+        </div>
+        <table
+          class="text-center w-auto text-md text-sm text-left text-gray-500 dark:text-gray-400"
+          id="tabelPerkalian"
+        >
+          <thead>
+            <tr
+              class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            ></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <span
+          class="pr-4 text-2xl font-bold text-gray-900 dark:text-gray-300"
+          id="centerText"
+        >
+          ---
+        </span>
+      </div>
+    </div>
+    <footer
+      class="fixed bottom-0 left-0 right-0 flex flex-row items-center justify-between py-4"
+    >
+      <span class="w-full">
+        <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+          Made
+          <!--with &#x2764;-->
+          by Christopher Gijoh - 2022
+        </p>
+      </span>
+    </footer>
+  </body>
+</html>
